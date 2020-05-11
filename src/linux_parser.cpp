@@ -39,9 +39,9 @@ string LinuxParser::Kernel() {
   string line;
   std::ifstream stream(kProcDirectory + kVersionFilename);
   if (stream.is_open()) {
-    std::getline(stream, line);
+    std::getline(stream, line);  
     std::istringstream linestream(line);
-    linestream >> os >> kernel;
+    linestream >> os >> os >> kernel;
   }
   return kernel;
 }
@@ -67,7 +67,24 @@ vector<int> LinuxParser::Pids() {
 }
 
 // TODO: Read and return the system memory utilization
-float LinuxParser::MemoryUtilization() { return 0.0; }
+float LinuxParser::MemoryUtilization() { 
+  float MemTotal,MemFree;
+  string key,value,kb,line;
+  std::ifstream filestream(kProcDirectory+kMeminfoFilename);
+  if(filestream.is_open()){
+    while(std::getline(filestream,line)){
+      std::istringstream linestream(line);
+      while(linestream>>key>>value>>kb){
+        if(key == "MemTotal:")
+           { MemTotal = std::stof(value);}
+        if(key == "MemFree:"){
+          MemFree = std::stof(value);
+        }
+      }
+    }
+  }
+  return (MemTotal-MemFree)/MemTotal;
+  }
 
 // TODO: Read and return the system uptime
 long LinuxParser::UpTime() { return 0; }

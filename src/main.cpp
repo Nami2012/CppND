@@ -3,6 +3,6 @@
 #include<iostream>
 int main() {
   System system;
-  std::cout<<system.OperatingSystem();
+  std::cout<<system.MemoryUtilization();
   //NCursesDisplay::Display(system);
 }
