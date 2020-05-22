@@ -3,6 +3,5 @@
 #include<iostream>
 int main() {
   System system;
-  std::cout<<system.UpTime();
-  //NCursesDisplay::Display(system);
+  NCursesDisplay::Display(system);
 }
