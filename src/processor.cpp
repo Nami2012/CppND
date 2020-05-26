@@ -7,7 +7,7 @@ using namespace std;
 float Processor::Utilization() { 
     vector<string> jiffy = LinuxParser::CpuUtilization();
     long int sum =0;
-    for(auto i=0;i<jiffy.size();i++){
+    for(long unsigned int i=0;i<jiffy.size();i++){
         sum += stol(jiffy[i]);
     }
     float utilize = 1-((float)stol(jiffy[3])/sum); 
